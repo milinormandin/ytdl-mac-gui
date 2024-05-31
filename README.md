@@ -5,4 +5,4 @@ A simple graphical user interface for the video download CLI tool, [youtube-dl](
 ## Dev Setup
 
 Activate virtual environment
-`source venv/bin/activate`
+`source .venv/bin/activate`
