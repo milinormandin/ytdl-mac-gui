@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import youtube_dl
 
-
+# Custom logging functionality
 class MyLogger(object):
     def debug(self, msg):
          print('DEBUG:', msg)
@@ -14,6 +14,13 @@ class MyLogger(object):
     def error(self, msg):
         print('ERROR:', msg)
 
+# required user input
+
+# download dir
+download_dir = 'output'
+# youtube url
+yt_url = 'https://www.youtube.com/watch?v=PjpyvYFSFPs'
+
 
 def my_hook(d):
     if d['status'] == 'finished':
@@ -22,6 +29,7 @@ def my_hook(d):
 
 ydl_opts = {
     'format': 'bestaudio/best',
+    'outtmpl': f'{download_dir}/%(playlist)s/%(title)s.%(ext)s',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'm4a',
@@ -31,4 +39,4 @@ ydl_opts = {
     'progress_hooks': [my_hook],
 }
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-    ydl.download(['https://www.youtube.com/watch?v=PjpyvYFSFPs'])
+    ydl.download([yt_url])
