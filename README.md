@@ -6,3 +6,7 @@ A simple graphical user interface for the video download CLI tool, [youtube-dl](
 
 Activate virtual environment
 `source .venv/bin/activate`
+
+## Random tips
+
+- If you run into issues with `uploader_id` do this fix: https://github.com/aalsuwaidi/yt-dlp/commit/f0ad8de3034c9e64a72253900ee263680f137be3

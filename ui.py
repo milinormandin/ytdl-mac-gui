@@ -13,9 +13,11 @@ def download_youtube_video(youtube_url, destination_folder, status_label):
     downloaded_file_path = f"{destination_folder}/downloaded_video.mp4"
     status_label.config(text=f"Download completed: {downloaded_file_path}")
 
-def start_download(youtube_url_entry, destination_folder_entry, status_label):
+def init_download(youtube_url_entry, destination_folder_entry, status_label):
     youtube_url = youtube_url_entry.get()
     destination_folder = destination_folder_entry.get()
+    
+    # Input validation
     if not youtube_url:
         messagebox.showwarning("Input Error", "Please paste a YouTube URL.")
         return
@@ -50,7 +52,7 @@ def create_gui():
     browse_button.grid(row=1, column=2, padx=10, pady=5)
 
     # Download button
-    download_button = ttk.Button(root, text="Download", command=lambda: start_download(youtube_url_entry, destination_folder_entry, status_label))
+    download_button = ttk.Button(root, text="Download", command=lambda: init_download(youtube_url_entry, destination_folder_entry, status_label))
     download_button.grid(row=2, column=0, columnspan=3, padx=10, pady=20)
 
     # Status area
