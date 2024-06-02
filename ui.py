@@ -59,8 +59,22 @@ def create_gui():
             status_label.config(text=f'ERROR: {msg}')
     
     def my_hook(d):
+        if d['status'] == 'downloading':
+            status_label.config(text=f'downloading...')
+            filename = d['filename']
+            total_bytes = int(d['total_bytes'])
+            print(total_bytes)
+            downloaded_bytes = int(d['downloaded_bytes'])
+            if total_bytes:
+                # Set the maximum value for the progress bar.
+                progressbar.configure(maximum=total_bytes)
+            else:
+                # Increase the progress.
+                progressbar.step(downloaded_bytes)
+            
+            progressbar.config()
         if d['status'] == 'finished':
-            status_label.config(text=f'Download completed ✅')
+            status_label.config(text=f'Download finished ✅')
     
     # YouTube URL input
     ttk.Label(root, text="Paste YouTube URL here:").grid(row=0, column=0, padx=10, pady=20, sticky=tk.W)
@@ -80,9 +94,13 @@ def create_gui():
 
     # TODO: add cancel button to kill thread: https://www.geeksforgeeks.org/python-different-ways-to-kill-a-thread/#
 
+    # Add progress bar
+    progressbar = ttk.Progressbar()
+    progressbar.grid(row=3, column=0, columnspan=3, padx=10, pady=20)
+    
     # Status area
     status_frame = tk.LabelFrame(root, text="Status", padx=10, pady=10)
-    status_frame.grid(row=3, column=0, columnspan=3, padx=10, pady=10, sticky="ew")
+    status_frame.grid(row=4, column=0, columnspan=3, padx=10, pady=10, sticky="ew")
     status_label = ttk.Label(status_frame, text="", anchor="w")
     status_label.pack(fill="both")
 

@@ -44,11 +44,11 @@ def download_yt_to_audio(download_dir, yt_url, loggerInstance, hookFn):
     ydl_opts = {
         'format': 'bestaudio/best',
         'outtmpl': f'{download_dir}/%(playlist)s/%(title)s.%(ext)s',
-        # 'postprocessors': [{
-        #     'key': 'FFmpegExtractAudio',
-        #     'preferredcodec': 'm4a',
-        #     'preferredquality': '192',
-        # }],
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'm4a',
+            'preferredquality': '192',
+        }],
         'logger': loggerInstance,
         'progress_hooks': [hookFn],
     }
